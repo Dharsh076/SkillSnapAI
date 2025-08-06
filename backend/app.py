@@ -1,4 +1,3 @@
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import openai
@@ -37,11 +36,20 @@ Return the results in the following JSON format:
 Job Description:
 \"\"\"{job_text}\"\"\"
 """
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2
-    )
 
-    reply = response.choices[0].message["content"]
-    return jsonify({"result": reply, "timestamp": datetime.now().isoformat()})
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.2
+        )
+        reply = response.choices[0].message["content"]
+        return jsonify({"result": reply, "timestamp": datetime.now().isoformat()})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# ✅ IMPORTANT FOR RENDER DEPLOYMENT
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=False, host="0.0.0.0", port=port)
