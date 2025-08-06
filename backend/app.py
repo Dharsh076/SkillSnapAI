@@ -20,7 +20,8 @@ def analyze():
     if not job_text:
         return jsonify({"error": "No job description provided"}), 400
 
-    prompt = f"""You are an AI assistant that analyzes job descriptions to identify skills.
+    prompt = f"""
+You are an AI assistant that analyzes job descriptions to identify skills.
 
 Given the following job description text, extract and categorize the relevant skills into two categories:
 1. Hard Skills – Technical or job-specific skills (e.g., Python, project management, AWS, SQL, etc.)
@@ -34,7 +35,8 @@ Return the results in the following JSON format:
 }}
 
 Job Description:
-"""{job_text}"""
+\"\"\"{job_text}\"\"\"
+"""
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[{"role": "user", "content": prompt}],
