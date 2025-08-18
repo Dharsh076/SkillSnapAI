@@ -1,55 +1,58 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import openai
+from openai import OpenAI
 import os
-from datetime import datetime
 from dotenv import load_dotenv
+import json
 
+# Load .env and initialize app
 load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 @app.route("/analyze", methods=["POST"])
 def analyze():
-    data = request.json
+    data = request.get_json()
     job_text = data.get("text", "")
-
-    if not job_text:
-        return jsonify({"error": "No job description provided"}), 400
+    print("🔹 Received Text:", job_text)
 
     prompt = f"""
-You are an AI assistant that analyzes job descriptions to identify skills.
+You are an expert HR analyst. From the job description below, extract and categorize key skills into:
+1. Hard Skills (e.g. programming, tools, certifications)
+2. Soft Skills (e.g. communication, teamwork)
 
-Given the following job description text, extract and categorize the relevant skills into two categories:
-1. Hard Skills – Technical or job-specific skills (e.g., Python, project management, AWS, SQL, etc.)
-2. Soft Skills – Interpersonal or behavioral skills (e.g., communication, leadership, time management, etc.)
-
-Return the results in the following JSON format:
-
+Return in JSON format:
 {{
-  "hard_skills": ["..."],
-  "soft_skills": ["..."]
+  "hard_skills": [...],
+  "soft_skills": [...]
 }}
 
 Job Description:
 \"\"\"{job_text}\"\"\"
-"""
+    """
 
     try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
+        response = client.chat.completions.create(
+            model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}],
-            temperature=0.2
+            temperature=0.3,
         )
-        reply = response.choices[0].message["content"]
-        return jsonify({"result": reply, "timestamp": datetime.now().isoformat()})
+
+        content = response.choices[0].message.content
+        print("✅ GPT Output:", content)
+
+        try:
+            # Try to parse content as JSON
+            parsed = json.loads(content)
+            return jsonify(parsed)
+        except json.JSONDecodeError:
+            return jsonify({"result": content})
+
     except Exception as e:
+        print("❌ Error:", str(e))
         return jsonify({"error": str(e)}), 500
 
-
-# ✅ IMPORTANT FOR RENDER DEPLOYMENT
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(debug=False, host="0.0.0.0", port=port)
+    app.run(debug=True, port=10000)
