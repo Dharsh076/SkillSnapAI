@@ -1,11 +1,10 @@
-
 {
   "name": "skillsnap-extension",
   "version": "1.0.0",
+  "description": "Chrome extension for skill analysis using OpenAI",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -13,9 +12,9 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.0.0",
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.0",
-    "tailwindcss": "^3.3.0",
-    "vite": "^4.4.0"
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.5.0"
   }
 }
