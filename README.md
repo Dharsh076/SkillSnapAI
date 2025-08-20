@@ -21,12 +21,10 @@ SkillSnap AI is a smart Chrome extension that helps job seekers extract and anal
 ## 🖼️ Demo
 
 https://github.com/Dharsh076/skillsnap/assets/
-
-<img width="832" height="546" alt="Screenshot 2025-08-20 133638" src="https://github.com/user-attachments/assets/fe20b4de-493c-479e-a215-260c22d0e314" />
 <img width="1614" height="937" alt="Screenshot 2025-08-20 133605" src="https://github.com/user-attachments/assets/549f170b-8f26-4727-b42f-1cc9fd0b9a78" />
-<img width="665" height="356" alt="Screenshot 2025-08-05 215843" src="https://github.com/user-attachments/assets/375a24df-6866-447e-9453-65758afacfc0" />
-<img width="843" height="685" alt="Screenshot 2025-08-20 133747" src="https://github.com/user-attachments/assets/28b7ebdc-4f9c-4743-8ef7-e25348e1c952" />
+<img width="832" height="546" alt="Screenshot 2025-08-20 133638" src="https://github.com/user-attachments/assets/fe20b4de-493c-479e-a215-260c22d0e314" />
 <img width="825" height="547" alt="Screenshot 2025-08-20 133648" src="https://github.com/user-attachments/assets/66030068-5eb9-4e6a-9b38-10c9175e27c0" />
+<img width="843" height="685" alt="Screenshot 2025-08-20 133747" src="https://github.com/user-attachments/assets/28b7ebdc-4f9c-4743-8ef7-e25348e1c952" />
 
 ---
 
